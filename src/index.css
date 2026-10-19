@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Lora", Georgia, serif;
+  --color-night: #1e1b4b;
+  --color-night-light: #312e81;
+  --color-paper: #f8f7fc;
+  --color-ink: #1f1b3a;
+  --color-gold: #f5b93a;
+}
+
+body {
+  background-color: #f8f7fc;
+  color: #1f1b3a;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Lora", Georgia, serif;
+}
