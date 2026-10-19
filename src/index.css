@@ -21,3 +21,7 @@ h2,
 h3 {
   font-family: "Lora", Georgia, serif;
 }
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-lg bg-gold px-5 py-2.5 text-sm font-semibold text-night transition-colors hover:bg-amber-300;
+}
