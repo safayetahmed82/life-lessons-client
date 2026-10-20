@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTitle from "../hooks/useTitle";
 import { authClient } from "../lib/auth-client";
+import GoogleButton from "../components/GoogleButton";
 
 const Register = () => {
   useTitle("LifeLessons – Register");
@@ -109,6 +110,13 @@ const Register = () => {
             Register
           </button>
         </form>
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-gray-200"></div>
+          <span className="text-sm text-gray-500">or</span>
+          <div className="h-px flex-1 bg-gray-200"></div>
+        </div>
+
+        <GoogleButton redirectTo="/" />
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Already have an account?{" "}

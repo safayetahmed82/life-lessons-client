@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useTitle from "../hooks/useTitle";
 import { authClient } from "../lib/auth-client";
+import GoogleButton from "../components/GoogleButton";
 
 const Login = () => {
   useTitle("LifeLessons – Login");
@@ -65,6 +66,13 @@ const Login = () => {
             Login
           </button>
         </form>
+        <div className="my-5 flex items-center gap-3">
+          <div className="h-px flex-1 bg-gray-200"></div>
+          <span className="text-sm text-gray-500">or</span>
+          <div className="h-px flex-1 bg-gray-200"></div>
+        </div>
+
+        <GoogleButton redirectTo={from} />
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{" "}
