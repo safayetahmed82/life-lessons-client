@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import AddLesson from "./pages/AddLesson";
+import MyLessons from "./pages/MyLessons";
 
 export default function App() {
   return (
@@ -29,7 +30,7 @@ export default function App() {
             path="/dashboard/my-lessons"
             element={
               <PrivateRoute>
-                <p className="p-10">My Lessons page coming soon</p>
+                <MyLessons />
               </PrivateRoute>
             }
           />
