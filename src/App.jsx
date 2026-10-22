@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import PrivateRoute from "./routes/PrivateRoute";
 import AddLesson from "./pages/AddLesson";
 import MyLessons from "./pages/MyLessons";
+import UpdateLesson from "./pages/UpdateLesson";
 
 export default function App() {
   return (
@@ -31,6 +32,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <MyLessons />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/dashboard/update-lesson/:id"
+            element={
+              <PrivateRoute>
+                <UpdateLesson />
               </PrivateRoute>
             }
           />
