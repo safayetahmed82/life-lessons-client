@@ -9,6 +9,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import AddLesson from "./pages/AddLesson";
 import MyLessons from "./pages/MyLessons";
 import UpdateLesson from "./pages/UpdateLesson";
+import PublicLessons from "./pages/PublicLessons";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/public-lessons" element={<PublicLessons />} />
           <Route
             path="/dashboard/add-lesson"
             element={
