@@ -11,6 +11,8 @@ import MyLessons from "./pages/MyLessons";
 import UpdateLesson from "./pages/UpdateLesson";
 import PublicLessons from "./pages/PublicLessons";
 import LessonDetails from "./pages/LessonDetails";
+import MyFavorites from "./pages/MyFavorites";
+import AuthorProfile from "./pages/AuthorProfile";
 
 export default function App() {
   return (
@@ -54,6 +56,15 @@ export default function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/dashboard/my-favorites"
+            element={
+              <PrivateRoute>
+                <MyFavorites />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/author/:id" element={<AuthorProfile />} />
           <Route
             path="/lessons/:id"
             element={
