@@ -31,7 +31,7 @@ const Navbar = () => {
   };
   const { data: session } = authClient.useSession();
   const user = session?.user;
-  const isPremium = false;
+  const isPremium = user?.isPremium === true;
 
   const handleLogout = async () => {
     await authClient.signOut();
@@ -80,6 +80,11 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               )}
+              {isPremium && (
+                <li className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-night">
+                  Premium ⭐
+                </li>
+              )}
             </>
           )}
         </ul>
@@ -113,7 +118,10 @@ const Navbar = () => {
                   >
                     Dashboard
                   </Link>
-                  <button  onClick={handleLogout} className="block w-full rounded-lg px-3 py-2 text-left text-sm text-ink hover:bg-paper">
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full rounded-lg px-3 py-2 text-left text-sm text-ink hover:bg-paper"
+                  >
                     Logout
                   </button>
                 </div>
@@ -204,7 +212,9 @@ const Navbar = () => {
               >
                 Dashboard
               </NavLink>
-              <button onClick={handleLogout} className="btn mt-3 w-full">Logout</button>
+              <button onClick={handleLogout} className="btn mt-3 w-full">
+                Logout
+              </button>
             </>
           ) : (
             <div className="mt-3 flex gap-3">
