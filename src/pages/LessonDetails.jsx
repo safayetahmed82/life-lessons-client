@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { FiBookmark, FiHeart, FiLock } from "react-icons/fi";
+import { FiBookmark, FiFlag, FiHeart, FiLock } from "react-icons/fi";
 import useTitle from "../hooks/useTitle";
 import Spinner from "../components/Spinner";
+import CommentSection from "../components/CommentSection";
+import ReportModal from "../components/ReportModal";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -15,6 +17,7 @@ const LessonDetails = () => {
   const [locked, setLocked] = useState(null);
   const [loading, setLoading] = useState(true);
   const [views] = useState(() => Math.floor(Math.random() * 10000));
+  const [showReport, setShowReport] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -46,7 +49,11 @@ const LessonDetails = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        setLesson({ ...lesson, liked: data.liked, likesCount: data.likesCount });
+        setLesson({
+          ...lesson,
+          liked: data.liked,
+          likesCount: data.likesCount,
+        });
       } else {
         toast.error(data.message);
       }
@@ -69,7 +76,7 @@ const LessonDetails = () => {
           favoritesCount: data.favoritesCount,
         });
         toast.success(
-          data.favorited ? "Saved to favorites" : "Removed from favorites"
+          data.favorited ? "Saved to favorites" : "Removed from favorites",
         );
       } else {
         toast.error(data.message);
@@ -184,7 +191,19 @@ const LessonDetails = () => {
             <FiBookmark className={lesson.favorited ? "fill-current" : ""} />
             {lesson.favorited ? "Saved" : "Save to Favorites"}
           </button>
+          <button
+            onClick={() => setShowReport(true)}
+            className="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-ink hover:bg-gray-50"
+          >
+            <FiFlag />
+            Report
+          </button>
         </div>
+        <CommentSection lessonId={id} />
+
+        {showReport && (
+          <ReportModal lessonId={id} onClose={() => setShowReport(false)} />
+        )}
       </article>
 
       <aside className="space-y-6">
@@ -192,11 +211,15 @@ const LessonDetails = () => {
           <h2 className="text-lg font-semibold text-ink">Engagement</h2>
           <div className="mt-3 grid grid-cols-3 gap-2 text-center">
             <div>
-              <p className="text-xl font-semibold text-night">{lesson.likesCount}</p>
+              <p className="text-xl font-semibold text-night">
+                {lesson.likesCount}
+              </p>
               <p className="text-xs text-gray-600">Likes</p>
             </div>
             <div>
-              <p className="text-xl font-semibold text-night">{lesson.favoritesCount}</p>
+              <p className="text-xl font-semibold text-night">
+                {lesson.favoritesCount}
+              </p>
               <p className="text-xs text-gray-600">Favorites</p>
             </div>
             <div>
@@ -210,7 +233,9 @@ const LessonDetails = () => {
           <h2 className="text-lg font-semibold text-ink">About this lesson</h2>
           <ul className="mt-3 space-y-2 text-sm text-gray-600">
             <li>Created: {new Date(lesson.createdAt).toLocaleDateString()}</li>
-            <li>Last updated: {new Date(lesson.updatedAt).toLocaleDateString()}</li>
+            <li>
+              Last updated: {new Date(lesson.updatedAt).toLocaleDateString()}
+            </li>
             <li>Visibility: {lesson.visibility}</li>
             <li>Reading time: {readingTime} min</li>
           </ul>
@@ -222,7 +247,9 @@ const LessonDetails = () => {
             alt={lesson.creatorName}
             className="mx-auto h-20 w-20 rounded-full border-2 border-gold object-cover"
           />
-          <p className="mt-3 text-lg font-semibold text-ink">{lesson.creatorName}</p>
+          <p className="mt-3 text-lg font-semibold text-ink">
+            {lesson.creatorName}
+          </p>
           <p className="text-sm text-gray-600">
             {lesson.authorLessonCount} lessons created
           </p>
