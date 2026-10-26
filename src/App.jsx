@@ -10,6 +10,7 @@ import AddLesson from "./pages/AddLesson";
 import MyLessons from "./pages/MyLessons";
 import UpdateLesson from "./pages/UpdateLesson";
 import PublicLessons from "./pages/PublicLessons";
+import LessonDetails from "./pages/LessonDetails";
 
 export default function App() {
   return (
@@ -50,6 +51,14 @@ export default function App() {
             element={
               <PrivateRoute>
                 <p className="p-10">Pricing page coming soon</p>
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/lessons/:id"
+            element={
+              <PrivateRoute>
+                <LessonDetails />
               </PrivateRoute>
             }
           />
