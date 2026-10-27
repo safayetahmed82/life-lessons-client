@@ -1,13 +1,15 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { authClient } from "../lib/auth-client";
 
 const linkClass = ({ isActive }) =>
   `whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-    isActive
-      ? "bg-night text-gold"
-      : "text-ink hover:bg-indigo-50"
+    isActive ? "bg-night text-gold" : "text-ink hover:bg-indigo-50"
   }`;
 
 const DashboardLayout = () => {
+  const { data: session } = authClient.useSession();
+  const isAdmin = session?.user?.role === "admin";
+
   return (
     <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 lg:grid-cols-[230px_1fr]">
       <aside className="lg:sticky lg:top-24 lg:self-start">
@@ -27,6 +29,26 @@ const DashboardLayout = () => {
           <NavLink to="/dashboard/profile" className={linkClass}>
             Profile
           </NavLink>
+
+          {isAdmin && (
+            <>
+              <NavLink to="/dashboard/admin" end className={linkClass}>
+                Admin Overview
+              </NavLink>
+              <NavLink to="/dashboard/admin/manage-users" className={linkClass}>
+                Manage Users
+              </NavLink>
+              <NavLink to="/dashboard/admin/manage-lessons" className={linkClass}>
+                Manage Lessons
+              </NavLink>
+              <NavLink to="/dashboard/admin/reported-lessons" className={linkClass}>
+                Reported Lessons
+              </NavLink>
+              <NavLink to="/dashboard/admin/profile" className={linkClass}>
+                Admin Profile
+              </NavLink>
+            </>
+          )}
         </nav>
       </aside>
 
