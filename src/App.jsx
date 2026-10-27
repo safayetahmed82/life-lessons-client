@@ -19,6 +19,11 @@ import UpdateLesson from "./pages/UpdateLesson";
 import MyFavorites from "./pages/MyFavorites";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
+import AdminRoute from "./routes/AdminRoute";
+import AdminHome from "./pages/admin/AdminHome";
+import ManageUsers from "./pages/admin/ManageUsers";
+import ManageLessons from "./pages/admin/ManageLessons";
+import ReportedLessons from "./pages/admin/ReportedLessons";
 
 export default function App() {
   return (
@@ -79,6 +84,46 @@ export default function App() {
             <Route path="update-lesson/:id" element={<UpdateLesson />} />
             <Route path="my-favorites" element={<MyFavorites />} />
             <Route path="profile" element={<Profile />} />
+            <Route
+              path="admin"
+              element={
+                <AdminRoute>
+                  <AdminHome />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="admin/manage-users"
+              element={
+                <AdminRoute>
+                  <ManageUsers />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="admin/manage-lessons"
+              element={
+                <AdminRoute>
+                  <ManageLessons />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="admin/reported-lessons"
+              element={
+                <AdminRoute>
+                  <ReportedLessons />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="admin/profile"
+              element={
+                <AdminRoute>
+                  <Profile />
+                </AdminRoute>
+              }
+            />
           </Route>
         </Route>
 
