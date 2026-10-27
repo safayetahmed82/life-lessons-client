@@ -1,18 +1,24 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import MainLayout from "./layouts/MainLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
+import PrivateRoute from "./routes/PrivateRoute";
 import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import PrivateRoute from "./routes/PrivateRoute";
+import PublicLessons from "./pages/PublicLessons";
+import LessonDetails from "./pages/LessonDetails";
+import AuthorProfile from "./pages/AuthorProfile";
+import Pricing from "./pages/Pricing";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
+import DashboardHome from "./pages/DashboardHome";
 import AddLesson from "./pages/AddLesson";
 import MyLessons from "./pages/MyLessons";
 import UpdateLesson from "./pages/UpdateLesson";
-import PublicLessons from "./pages/PublicLessons";
-import LessonDetails from "./pages/LessonDetails";
 import MyFavorites from "./pages/MyFavorites";
-import AuthorProfile from "./pages/AuthorProfile";
+import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -24,47 +30,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/public-lessons" element={<PublicLessons />} />
-          <Route
-            path="/dashboard/add-lesson"
-            element={
-              <PrivateRoute>
-                <AddLesson />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard/my-lessons"
-            element={
-              <PrivateRoute>
-                <MyLessons />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard/update-lesson/:id"
-            element={
-              <PrivateRoute>
-                <UpdateLesson />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/pricing"
-            element={
-              <PrivateRoute>
-                <p className="p-10">Pricing page coming soon</p>
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/dashboard/my-favorites"
-            element={
-              <PrivateRoute>
-                <MyFavorites />
-              </PrivateRoute>
-            }
-          />
           <Route path="/author/:id" element={<AuthorProfile />} />
+
           <Route
             path="/lessons/:id"
             element={
@@ -73,7 +40,48 @@ export default function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/pricing"
+            element={
+              <PrivateRoute>
+                <Pricing />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/payment/success"
+            element={
+              <PrivateRoute>
+                <PaymentSuccess />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/payment/cancel"
+            element={
+              <PrivateRoute>
+                <PaymentCancel />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <DashboardLayout />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<DashboardHome />} />
+            <Route path="add-lesson" element={<AddLesson />} />
+            <Route path="my-lessons" element={<MyLessons />} />
+            <Route path="update-lesson/:id" element={<UpdateLesson />} />
+            <Route path="my-favorites" element={<MyFavorites />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
