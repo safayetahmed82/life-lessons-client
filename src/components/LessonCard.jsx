@@ -50,6 +50,9 @@ const LessonCard = ({ lesson, canView }) => {
             {lesson.description}
           </p>
           <p className="text-xs font-medium text-night">{lesson.category}</p>
+          <p className="text-xs text-gray-500">
+            {lesson.favoritesCount || 0} saves · {lesson.likesCount || 0} likes
+          </p>
 
           <div className="mt-2 flex items-center gap-2">
             <img
@@ -76,7 +79,9 @@ const LessonCard = ({ lesson, canView }) => {
       {!canView && (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/70 px-4 text-center">
           <FiLock className="text-3xl text-night" />
-          <p className="font-semibold text-ink">Premium Lesson – Upgrade to view</p>
+          <p className="font-semibold text-ink">
+            Premium Lesson – Upgrade to view
+          </p>
           <Link to="/pricing" className="btn">
             Upgrade
           </Link>
