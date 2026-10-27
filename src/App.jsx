@@ -24,6 +24,7 @@ import AdminHome from "./pages/admin/AdminHome";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageLessons from "./pages/admin/ManageLessons";
 import ReportedLessons from "./pages/admin/ReportedLessons";
+import Terms from "./pages/Terms";
 
 export default function App() {
   return (
@@ -36,7 +37,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/public-lessons" element={<PublicLessons />} />
           <Route path="/author/:id" element={<AuthorProfile />} />
-
+          <Route path="/terms" element={<Terms />} />
           <Route
             path="/lessons/:id"
             element={
