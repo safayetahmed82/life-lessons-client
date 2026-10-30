@@ -81,8 +81,31 @@ const MyLessons = () => {
   const selectClass =
     "rounded-lg border border-gray-300 bg-white px-2 py-1 text-sm disabled:cursor-not-allowed disabled:bg-gray-100";
 
+  const actionButtons = (lesson) => (
+    <div className="flex flex-wrap gap-2">
+      <Link
+        to={`/lessons/${lesson._id}`}
+        className="rounded-lg border border-night px-3 py-1 text-xs font-semibold text-night hover:bg-indigo-50"
+      >
+        Details
+      </Link>
+      <Link
+        to={`/dashboard/update-lesson/${lesson._id}`}
+        className="rounded-lg border border-night px-3 py-1 text-xs font-semibold text-night hover:bg-indigo-50"
+      >
+        Update
+      </Link>
+      <button
+        onClick={() => setDeleteId(lesson._id)}
+        className="rounded-lg border border-red-600 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-50"
+      >
+        Delete
+      </button>
+    </div>
+  );
+
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12">
+    <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold text-ink">My Lessons</h1>
@@ -101,40 +124,38 @@ const MyLessons = () => {
           </Link>
         </div>
       ) : (
-        <div className="mt-8 overflow-x-auto rounded-xl border border-indigo-100 bg-white">
-          <table className="w-full min-w-[900px] text-left text-sm">
-            <thead className="bg-night text-white">
-              <tr>
-                <th className="px-4 py-3">Title</th>
-                <th className="px-4 py-3">Category</th>
-                <th className="px-4 py-3">Visibility</th>
-                <th className="px-4 py-3">Access</th>
-                <th className="px-4 py-3">Created</th>
-                <th className="px-4 py-3">Likes</th>
-                <th className="px-4 py-3">Saves</th>
-                <th className="px-4 py-3">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {lessons.map((lesson) => (
-                <tr key={lesson._id} className="border-t border-indigo-50">
-                  <td className="max-w-[220px] truncate px-4 py-3 font-medium text-ink">
-                    {lesson.title}
-                  </td>
-                  <td className="px-4 py-3">{lesson.category}</td>
-                  <td className="px-4 py-3">
+        <>
+          <div className="mt-8 space-y-4 md:hidden">
+            {lessons.map((lesson) => (
+              <div
+                key={lesson._id}
+                className="rounded-xl border border-indigo-100 bg-white p-4"
+              >
+                <h2 className="font-semibold text-ink">{lesson.title}</h2>
+                <p className="mt-1 text-xs text-gray-600">
+                  {lesson.category} · {new Date(lesson.createdAt).toLocaleDateString()}
+                </p>
+                <p className="mt-1 text-xs text-gray-600">
+                  {lesson.likesCount} likes · {lesson.favoritesCount} saves
+                </p>
+
+                <div className="mt-3 grid grid-cols-2 gap-3">
+                  <label className="text-xs text-gray-600">
+                    Visibility
                     <select
                       value={lesson.visibility}
                       onChange={(e) =>
                         updateField(lesson._id, { visibility: e.target.value })
                       }
-                      className={selectClass}
+                      className={`${selectClass} mt-1 w-full`}
                     >
                       <option value="Public">Public</option>
                       <option value="Private">Private</option>
                     </select>
-                  </td>
-                  <td className="px-4 py-3">
+                  </label>
+
+                  <label className="text-xs text-gray-600">
+                    Access
                     <select
                       value={lesson.accessLevel}
                       disabled={!isPremium}
@@ -142,44 +163,78 @@ const MyLessons = () => {
                       onChange={(e) =>
                         updateField(lesson._id, { accessLevel: e.target.value })
                       }
-                      className={selectClass}
+                      className={`${selectClass} mt-1 w-full`}
                     >
                       <option value="Free">Free</option>
                       <option value="Premium">Premium</option>
                     </select>
-                  </td>
-                  <td className="px-4 py-3">
-                    {new Date(lesson.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-3">{lesson.likesCount}</td>
-                  <td className="px-4 py-3">{lesson.favoritesCount}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex gap-2">
-                      <Link
-                        to={`/lessons/${lesson._id}`}
-                        className="rounded-lg border border-night px-3 py-1 text-xs font-semibold text-night hover:bg-indigo-50"
-                      >
-                        Details
-                      </Link>
-                      <Link
-                        to={`/dashboard/update-lesson/${lesson._id}`}
-                        className="rounded-lg border border-night px-3 py-1 text-xs font-semibold text-night hover:bg-indigo-50"
-                      >
-                        Update
-                      </Link>
-                      <button
-                        onClick={() => setDeleteId(lesson._id)}
-                        className="rounded-lg border border-red-600 px-3 py-1 text-xs font-semibold text-red-600 hover:bg-red-50"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
+                  </label>
+                </div>
+
+                <div className="mt-4">{actionButtons(lesson)}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 hidden overflow-x-auto rounded-xl border border-indigo-100 bg-white md:block">
+            <table className="w-full min-w-[820px] text-left text-sm">
+              <thead className="bg-night text-white">
+                <tr>
+                  <th className="px-4 py-3">Title</th>
+                  <th className="px-4 py-3">Category</th>
+                  <th className="px-4 py-3">Visibility</th>
+                  <th className="px-4 py-3">Access</th>
+                  <th className="px-4 py-3">Created</th>
+                  <th className="px-4 py-3">Likes</th>
+                  <th className="px-4 py-3">Saves</th>
+                  <th className="px-4 py-3">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {lessons.map((lesson) => (
+                  <tr key={lesson._id} className="border-t border-indigo-50">
+                    <td className="max-w-[220px] truncate px-4 py-3 font-medium text-ink">
+                      {lesson.title}
+                    </td>
+                    <td className="px-4 py-3">{lesson.category}</td>
+                    <td className="px-4 py-3">
+                      <select
+                        value={lesson.visibility}
+                        onChange={(e) =>
+                          updateField(lesson._id, { visibility: e.target.value })
+                        }
+                        className={selectClass}
+                      >
+                        <option value="Public">Public</option>
+                        <option value="Private">Private</option>
+                      </select>
+                    </td>
+                    <td className="px-4 py-3">
+                      <select
+                        value={lesson.accessLevel}
+                        disabled={!isPremium}
+                        title={isPremium ? "" : "Upgrade to Premium to change this"}
+                        onChange={(e) =>
+                          updateField(lesson._id, { accessLevel: e.target.value })
+                        }
+                        className={selectClass}
+                      >
+                        <option value="Free">Free</option>
+                        <option value="Premium">Premium</option>
+                      </select>
+                    </td>
+                    <td className="px-4 py-3">
+                      {new Date(lesson.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="px-4 py-3">{lesson.likesCount}</td>
+                    <td className="px-4 py-3">{lesson.favoritesCount}</td>
+                    <td className="px-4 py-3">{actionButtons(lesson)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
 
       {deleteId && (
