@@ -9,7 +9,8 @@ const slides = [
     text: "We forget more than we remember. Write your lessons down while they are still fresh, and keep them for the days you need them most.",
     button: "Start writing",
     link: "/dashboard/add-lesson",
-    quote: "I learned more from the project that failed than from the three that went fine.",
+    quote:
+      "I learned more from the project that failed than from the three that went fine.",
     tone: "Realization",
   },
   {
@@ -17,7 +18,8 @@ const slides = [
     text: "Browse lessons shared by people from every walk of life. Filter by category or emotional tone, and find the wisdom you need today.",
     button: "Browse lessons",
     link: "/public-lessons",
-    quote: "Waiting for confidence cost me two years that action would have given back in two months.",
+    quote:
+      "Waiting for confidence cost me two years that action would have given back in two months.",
     tone: "Motivational",
   },
   {
@@ -25,7 +27,8 @@ const slides = [
     text: "Pay once and read every Premium lesson for life, and share your own paid lessons with the community.",
     button: "See Premium",
     link: "/pricing",
-    quote: "The people who helped me most never knew it, because I only ever thanked them in my head.",
+    quote:
+      "The people who helped me most never knew it, because I only ever thanked them in my head.",
     tone: "Gratitude",
   },
 ];
@@ -46,7 +49,7 @@ const HeroSlider = () => {
   const slide = slides[index];
 
   return (
-    <section className="bg-night">
+    <section className="bg-gradient-to-b from-night-light to-night">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:py-20">
         <div className="min-h-[380px]">
           <AnimatePresence mode="wait">
@@ -71,7 +74,9 @@ const HeroSlider = () => {
               </div>
 
               <div className="rounded-2xl bg-night-light p-7">
-                <p className="font-serif text-6xl leading-none text-gold">&ldquo;</p>
+                <p className="font-serif text-6xl leading-none text-gold">
+                  &ldquo;
+                </p>
                 <p className="mt-2 font-serif text-xl leading-snug text-white">
                   {slide.quote}
                 </p>
