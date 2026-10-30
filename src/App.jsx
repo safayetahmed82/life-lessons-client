@@ -25,11 +25,13 @@ import ManageUsers from "./pages/admin/ManageUsers";
 import ManageLessons from "./pages/admin/ManageLessons";
 import ReportedLessons from "./pages/admin/ReportedLessons";
 import Terms from "./pages/Terms";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   return (
     <>
       <Toaster />
+      <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
