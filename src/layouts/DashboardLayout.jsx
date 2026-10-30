@@ -11,8 +11,8 @@ const DashboardLayout = () => {
   const isAdmin = session?.user?.role === "admin";
 
   return (
-    <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-4 py-8 lg:grid-cols-[230px_1fr] lg:px-8">
-      <aside className="lg:sticky lg:top-24 lg:self-start">
+    <div className="mx-auto grid w-full max-w-[1400px] grid-cols-1 gap-6 px-4 py-8 lg:grid-cols-[230px_minmax(0,1fr)]">
+      <aside className="min-w-0 lg:sticky lg:top-24 lg:self-start">
         <nav className="flex gap-2 overflow-x-auto rounded-xl border border-indigo-100 bg-white p-3 lg:flex-col">
           <NavLink to="/dashboard" end className={linkClass}>
             Overview
