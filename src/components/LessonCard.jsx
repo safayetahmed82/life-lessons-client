@@ -9,6 +9,10 @@ const toneDots = {
 };
 
 const LessonCard = ({ lesson, canView }) => {
+  const preview =
+    lesson.description.length >= 120
+      ? lesson.description.slice(0, lesson.description.lastIndexOf(" ")) + "..."
+      : lesson.description;
   return (
     <div className="relative flex h-full flex-col overflow-hidden rounded-xl border border-indigo-100 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className={canView ? "" : "blur-sm"}>
@@ -47,7 +51,7 @@ const LessonCard = ({ lesson, canView }) => {
             {lesson.title}
           </h3>
           <p className="line-clamp-3 text-sm text-gray-600">
-            {lesson.description}
+            {lesson.preview}
           </p>
           <p className="text-xs font-medium text-night">{lesson.category}</p>
           <p className="text-xs text-gray-500">
