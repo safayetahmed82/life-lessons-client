@@ -51,7 +51,7 @@ const LessonCard = ({ lesson, canView }) => {
             {lesson.title}
           </h3>
           <p className="line-clamp-3 text-sm text-gray-600">
-            {lesson.preview}
+            {preview}
           </p>
           <p className="text-xs font-medium text-night">{lesson.category}</p>
           <p className="text-xs text-gray-500">
